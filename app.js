@@ -711,3 +711,153 @@ gsap.to(".gradient-text",{
     ease:"none"
 
 });
+/* ==========================================
+    REVEAL ELEMENTS ON SCROLL
+========================================== */
+
+const reveals = document.querySelectorAll(".reveal");
+
+function revealSections(){
+
+    const trigger = window.innerHeight * 0.85;
+
+    reveals.forEach((element)=>{
+
+        const top = element.getBoundingClientRect().top;
+
+        if(top < trigger){
+
+            element.classList.add("active");
+
+        }
+
+    });
+
+}
+
+window.addEventListener("scroll", revealSections);
+
+revealSections();
+
+
+
+/* ==========================================
+    BACK TO TOP BUTTON
+========================================== */
+
+const topButton = document.createElement("button");
+
+topButton.className = "backToTop";
+
+topButton.innerHTML = '<i class="ri-arrow-up-line"></i>';
+
+document.body.appendChild(topButton);
+
+window.addEventListener("scroll",()=>{
+
+    if(window.scrollY > 500){
+
+        topButton.classList.add("show");
+
+    }
+
+    else{
+
+        topButton.classList.remove("show");
+
+    }
+
+});
+
+topButton.addEventListener("click",()=>{
+
+    lenis.scrollTo(0);
+
+});
+
+
+
+/* ==========================================
+    NUMBER COUNTER
+========================================== */
+
+const counters = document.querySelectorAll(".stat h2");
+
+const speed = 60;
+
+function counterAnimation(){
+
+    counters.forEach(counter=>{
+
+        const target = parseInt(counter.innerText);
+
+        let count = 0;
+
+        const update = ()=>{
+
+            const increment = target / speed;
+
+            if(count < target){
+
+                count += increment;
+
+                counter.innerText = Math.ceil(count) + "+";
+
+                requestAnimationFrame(update);
+
+            }
+
+            else{
+
+                counter.innerText = target + "+";
+
+            }
+
+        };
+
+        update();
+
+    });
+
+}
+
+counterAnimation();
+
+
+
+/* ==========================================
+    SMALL UTILITIES
+========================================== */
+
+function random(min,max){
+
+    return Math.random()*(max-min)+min;
+
+}
+
+function clamp(value,min,max){
+
+    return Math.min(Math.max(value,min),max);
+
+}
+
+
+
+/* ==========================================
+    WINDOW RESIZE
+========================================== */
+
+window.addEventListener("resize",()=>{
+
+    ScrollTrigger.refresh();
+
+});
+
+
+
+/* ==========================================
+    PAGE LOADED
+========================================== */
+
+console.log("%cHenry Portfolio Loaded 🚀",
+"font-size:18px;color:#7c5cff;font-weight:bold;");
